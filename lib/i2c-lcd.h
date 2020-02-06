@@ -2,7 +2,8 @@
 Edit by modify: Ngoc Hang 
 Porting to linux: Winnguyen
 **/
-
+#ifndef  I2C_LCD_H
+#define  I2C_LCD_H
 #include "I2C.h"
 
 #define MAX_ROW     1
@@ -22,3 +23,4 @@ int lcd_goto_XY (I2C_t* instance, int row, int col); //set proper location on sc
 
 int lcd_send_line(I2C_t* instance, uint8_t* str, int line);
 
+#endif

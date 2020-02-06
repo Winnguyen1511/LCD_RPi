@@ -1,5 +1,7 @@
-#include <stdint.h>
+#ifndef I2C_H
+#define I2C_H
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,3 +47,5 @@ int I2C_Master_Transmit(I2C_t* instance, uint16_t DevAddress, uint8_t*pData, uin
 int I2C_Master_Receive(I2C_t* instance, uint16_t DevAddress, uint8_t*pData, uint16_t Size);
 
 int I2C_IsDeviceReady(I2C_t* instance, uint16_t DevAddress, uint32_t Trials);
+
+#endif

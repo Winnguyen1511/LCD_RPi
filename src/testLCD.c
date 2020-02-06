@@ -1,4 +1,4 @@
-//#include "I2C.h"
+#include "I2C.h"
 #include "i2c-lcd.h"
 
 int main(int argc, char** argv)
