@@ -9,6 +9,7 @@ int main(int argc, char** argv)
     sleep(2);
     lcd_goto_XY(&i2c, 0,0);
     lcd_send_string(&i2c, "hello world");
+    sleep(2);
     lcd_send_line(&i2c, "my name is khoa", 0);
     return SUCCESS;
 }

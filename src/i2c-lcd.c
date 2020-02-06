@@ -115,6 +115,9 @@ int lcd_send_line(I2C_t* instance, uint8_t* str, int line)
 	{
 		printf("Warning: string size out of bound\n");
 	}
+
+	if(!lcd_goto_XY(instance, line, 0))
+		return ERROR;
 	if(!lcd_send_string(instance, str))
 	{
 		printf("Error: Cannot send string %s to line %d\n", str, line);
