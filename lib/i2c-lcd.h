@@ -5,6 +5,9 @@ Porting to linux: Winnguyen
 
 #include "I2C.h"
 
+#define MAX_ROW     1
+#define MAX_COL     15
+
 int lcd_init (I2C_t* instance);   // initialize lcd
 
 int lcd_send_cmd (I2C_t* instance, uint8_t cmd);  // send command to the lcd

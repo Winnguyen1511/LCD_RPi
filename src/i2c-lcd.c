@@ -82,13 +82,22 @@ int lcd_clear_display (I2C_t* instance)
 int lcd_goto_XY (I2C_t* instance, int row, int col)
 {
 	uint8_t pos_Addr;
-	if(row == 1) 
+	if(col < 0 || col > MAX_COL)
 	{
-		pos_Addr = 0x80 + row - 1 + col;
+		printf("Error: col=0->15\n");
+		return ERROR;
 	}
-	else
+	if(row == 0) 
+	{
+		pos_Addr = 0x80 + col;
+	}
+	else if(row == MAX_ROW)
 	{
 		pos_Addr = 0x80 | (0x40 + col);
+	}
+	else{
+		printf("Error: row=0->1\n");
+		return ERROR;
 	}
 	if(!lcd_send_cmd(instance, pos_Addr)) return ERROR;
 
@@ -97,5 +106,19 @@ int lcd_goto_XY (I2C_t* instance, int row, int col)
 
 int lcd_send_line(I2C_t* instance, uint8_t* str, int line)
 {
-	
+	if(!lcd_goto_XY(instance, line, 0))
+		return ERROR;
+	if(!lcd_send_string(instance, "               "))
+		return ERROR;
+	int len = strlen(str);
+	if(len > MAX_COL)
+	{
+		printf("Warning: string size out of bound\n");
+	}
+	if(!lcd_send_string(instance, str))
+	{
+		printf("Error: Cannot send string %s to line %d\n", str, line);
+		return ERROR;
+	}
+	return SUCCESS;
 }
